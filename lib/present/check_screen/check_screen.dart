@@ -11,17 +11,18 @@ class CheckScreen extends StatefulWidget {
 }
 
 class _CheckScreenState extends State<CheckScreen> {
-  DateTime _dateTime= DateTime.now();
-  Timer? _timer;//
+  DateTime _dateTime = DateTime.now();
+  Timer? _timer;
 
   @override
   void initState() {
-    _updateDateTime();
     super.initState();
+    _updateDateTime();
+
   }
 
   void _updateDateTime() {
-    _timer =Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _dateTime = DateTime.now();
       });
@@ -301,8 +302,10 @@ class _CheckScreenState extends State<CheckScreen> {
                     border: Border.all(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(child: OutlinedButton(onPressed: () {  },
-                  child: Icon(Icons.arrow_back_ios_new))),
+                  child: Center(
+                      child: OutlinedButton(
+                          onPressed: () {},
+                          child: Icon(Icons.arrow_back_ios_new))),
                 ),
               ),
             ],
