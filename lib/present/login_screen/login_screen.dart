@@ -6,6 +6,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('출결 체크기'),
+        backgroundColor: Colors.blue,
+      ),
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -30,6 +34,9 @@ class LoginScreen extends StatelessWidget {
 
             }, child: Text('출결체크기 로그인'),),
           ),
+          SizedBox(height: 200,),
+          Text('출결 체크기', style: TextStyle(color: Colors.grey),)
+
         ],
       ),
     );
