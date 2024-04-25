@@ -181,7 +181,7 @@ class _CheckScreenState extends State<CheckScreen> {
                     child: TextButton(
                       onPressed: () {},
                       child: Text(
-                        '1',
+                        '0',
                         style: TextStyle(fontSize: 40),
                       ),
                     ),
