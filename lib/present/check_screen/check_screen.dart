@@ -12,7 +12,7 @@ class CheckScreen extends StatefulWidget {
 
 class _CheckScreenState extends State<CheckScreen> {
   DateTime _dateTime= DateTime.now();
-  Timer? _timer;
+  Timer? _timer;//
 
   @override
   void initState() {
