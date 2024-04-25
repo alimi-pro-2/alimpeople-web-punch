@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -31,7 +30,8 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   void dispose() {
-    _timer?.cancel(); // Timer를 dispose
+    _timer?.cancel();
+    _timer!.cancel();
     super.dispose();
   }
 
@@ -76,17 +76,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '1',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '1',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -96,17 +95,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '2',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '2',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -116,82 +114,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '3',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '4',
-                        style: TextStyle(fontSize: 40),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '5',
-                        style: TextStyle(fontSize: 40),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '6',
-                        style: TextStyle(fontSize: 40),
-                      ),
+                    onPressed: () {},
+                    child: const Text(
+                      '3',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -206,17 +138,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '7',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '4',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -226,17 +157,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '8',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '5',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -246,17 +176,78 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '9',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '6',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '7',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '8',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '9',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -278,17 +269,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '0',
-                        style: TextStyle(fontSize: 40),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      '0',
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -298,17 +288,20 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: Container(
                   width: 150,
                   height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                      child: OutlinedButton(
-                          onPressed: () {},
-                          child: const Icon(Icons.arrow_back_ios_new))),
+                  child: OutlinedButton(
+                      style: ButtonStyle(
+                        side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Icon(Icons.arrow_back_ios_new)),
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 16,
           ),
           Row(
             children: [
@@ -316,10 +309,16 @@ class _CheckScreenState extends State<CheckScreen> {
                 flex: 1,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('등원',style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    '등원',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.blue),
+                        MaterialStateProperty.all<Color>(Colors.blue),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
@@ -330,7 +329,13 @@ class _CheckScreenState extends State<CheckScreen> {
                 flex: 1,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('하원',style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    '하원',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),
