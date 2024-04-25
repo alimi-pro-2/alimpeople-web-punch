@@ -73,9 +73,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '1',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -90,9 +93,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '2',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -107,65 +113,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '3',
-                      style: TextStyle(fontSize: 40),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '4',
-                      style: TextStyle(fontSize: 40),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '5',
-                      style: TextStyle(fontSize: 40),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 150,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '6',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -185,9 +138,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '7',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -202,9 +158,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '8',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -219,9 +178,77 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '9',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 150,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '1',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -248,9 +275,12 @@ class _CheckScreenState extends State<CheckScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
-                      '0',
-                      style: TextStyle(fontSize: 40),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '0',
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                   ),
                 ),
@@ -264,9 +294,7 @@ class _CheckScreenState extends State<CheckScreen> {
                     border: Border.all(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(
-                    child: Icon(Icons.arrow_back_ios_new)
-                  ),
+                  child: Center(child: Icon(Icons.arrow_back_ios_new)),
                 ),
               ),
             ],
