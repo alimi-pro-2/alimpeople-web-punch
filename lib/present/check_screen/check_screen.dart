@@ -17,11 +17,15 @@ class _CheckScreenState extends State<CheckScreen> {
   String _currentNumber = '';
   String _previousNumber = '';
 
+
+
   void _onPressed(String textEditingContorller) {
     setState(() {
       if (_previousNumber.length < 4) {
         _currentNumber = textEditingContorller;
         _previousNumber +=  _currentNumber;
+
+        // print(_previousNumber);
       }
       if(_previousNumber.length == 4) {
         //Todo firebase에 값을 보낸다.
@@ -31,8 +35,10 @@ class _CheckScreenState extends State<CheckScreen> {
 
   void _onBackspace() {
     setState(() {
-      _previousNumber = _previousNumber.substring(0, _previousNumber.length - 1);
-      return print(_previousNumber);
+      if (_previousNumber.isNotEmpty) {
+        _previousNumber = _previousNumber.substring(0, _previousNumber.length - 1); // Remove the last character
+        // print(_previousNumber);
+      }
     });
   }
 
@@ -59,6 +65,9 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //Todo passWord 숫자의 변화하게 하는 것 고치기
+    String passWordNumber = '* * * *';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('출결 체크기'),
@@ -82,7 +91,7 @@ class _CheckScreenState extends State<CheckScreen> {
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: const Center(
               child: Text(
-                '* * * *',
+                '$passWordNumber',
                 style: TextStyle(fontSize: 40),
               ),
             ),
@@ -299,7 +308,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onBackspace(),
+                    onPressed: () => _onPressed('0'),
                     child: const Text(
                       '0',
                       style: TextStyle(fontSize: 40),
@@ -318,7 +327,7 @@ class _CheckScreenState extends State<CheckScreen> {
                           BorderSide(width: 1.0), // 외곽선의 두께 설정
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () => _onBackspace(),
                       child: const Icon(Icons.arrow_back_ios_new)),
                 ),
               ),
