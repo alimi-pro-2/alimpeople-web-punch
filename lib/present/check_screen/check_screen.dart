@@ -13,6 +13,28 @@ class CheckScreen extends StatefulWidget {
 class _CheckScreenState extends State<CheckScreen> {
   DateTime _dateTime = DateTime.now();
   Timer? _timer;
+  TextEditingController? _textEditingController;
+  String _currentNumber = '';
+  String _previousNumber = '';
+
+  void _onPressed(String textEditingContorller) {
+    setState(() {
+      if (_previousNumber.length < 4) {
+        _currentNumber = textEditingContorller;
+        _previousNumber +=  _currentNumber;
+      }
+      if(_previousNumber.length == 4) {
+        //Todo firebase에 값을 보낸다.
+      }
+    });
+  }
+
+  void _onBackspace() {
+    setState(() {
+      _previousNumber = _previousNumber.substring(0, _previousNumber.length - 1);
+      return print(_previousNumber);
+    });
+  }
 
   @override
   void initState() {
@@ -68,6 +90,8 @@ class _CheckScreenState extends State<CheckScreen> {
           const SizedBox(
             height: 70,
           ),
+
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -82,7 +106,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onPressed('1'),
                     child: const Text(
                       '1',
                       style: TextStyle(fontSize: 40),
@@ -101,7 +125,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: ()  => _onPressed('2'),
                     child: const Text(
                       '2',
                       style: TextStyle(fontSize: 40),
@@ -120,7 +144,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onPressed('3'),
                     child: const Text(
                       '3',
                       style: TextStyle(fontSize: 40),
@@ -144,7 +168,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: ()  => _onPressed('4'),
                     child: const Text(
                       '4',
                       style: TextStyle(fontSize: 40),
@@ -163,7 +187,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: ()  => _onPressed('5'),
                     child: const Text(
                       '5',
                       style: TextStyle(fontSize: 40),
@@ -182,7 +206,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: ()  => _onPressed('6'),
                     child: const Text(
                       '6',
                       style: TextStyle(fontSize: 40),
@@ -206,7 +230,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onPressed('7'),
                     child: const Text(
                       '7',
                       style: TextStyle(fontSize: 40),
@@ -225,7 +249,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onPressed('8'),
                     child: const Text(
                       '8',
                       style: TextStyle(fontSize: 40),
@@ -244,7 +268,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onPressed('9'),
                     child: const Text(
                       '9',
                       style: TextStyle(fontSize: 40),
@@ -275,7 +299,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _onBackspace(),
                     child: const Text(
                       '0',
                       style: TextStyle(fontSize: 40),
