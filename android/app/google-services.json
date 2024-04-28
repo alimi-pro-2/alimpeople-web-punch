@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "440988943055",
+    "firebase_url": "https://alimi-pro-2-3b2fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "alimi-pro-2-3b2fb",
+    "storage_bucket": "alimi-pro-2-3b2fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440988943055:android:4fa5dba1d2d6af83d26dba",
+        "android_client_info": {
+          "package_name": "com.example.alimpeople_web_punch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNBTwkTwO0A6OSWA9eS0tkvSmtvgEo-KU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440988943055:android:a76657905ed9ff53d26dba",
+        "android_client_info": {
+          "package_name": "com.survivalcoding.alimipro_mock_data"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNBTwkTwO0A6OSWA9eS0tkvSmtvgEo-KU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:alimpeople_web_punch/data/repository/firebase_academy_repository_impl.dart';
+import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CheckScreen extends StatefulWidget {
-  const CheckScreen({super.key});
+  final AcademyRepository academyRepository;
+
+  const CheckScreen({super.key, required this.academyRepository});
 
   @override
   State<CheckScreen> createState() => _CheckScreenState();
@@ -19,10 +23,9 @@ class _CheckScreenState extends State<CheckScreen> {
   String _previousPassWord = '* * * *';
 
   void _onPressed(String textEditingController) {
-    if(_previousNumber.length == 0)
-      {
-        _previousPassWord = '';
-      }
+    if (_previousNumber.length == 0) {
+      _previousPassWord = '';
+    }
     setState(() {
       if (_previousNumber.length < 4) {
         _currentNumber = textEditingController;
@@ -39,9 +42,10 @@ class _CheckScreenState extends State<CheckScreen> {
   void _onBackspace() {
     setState(() {
       if (_previousNumber.isNotEmpty) {
-        _previousNumber = _previousNumber.substring(
-            0, _previousNumber.length - 1); // Remove the last character
-        // print(_previousNumber);
+        _previousNumber =
+            _previousNumber.substring(0, _previousNumber.length - 1);
+        _previousPassWord = _previousPassWord.substring(
+            0, _previousPassWord.length - 1); // Remove the last character
       }
     });
   }
@@ -50,7 +54,6 @@ class _CheckScreenState extends State<CheckScreen> {
   void initState() {
     super.initState();
     _updateDateTime();
-
   }
 
   void _updateDateTime() {
@@ -71,7 +74,7 @@ class _CheckScreenState extends State<CheckScreen> {
   Widget build(BuildContext context) {
     //Todo passWord 숫자의 변화하게 하는 것 고치기
 
-    final controller = TextEditingController(text: _previousPassWord );
+    final controller = TextEditingController(text: _previousPassWord);
 
     return Scaffold(
       appBar: AppBar(
@@ -95,7 +98,6 @@ class _CheckScreenState extends State<CheckScreen> {
             decoration:
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
-
               controller: controller,
               style: TextStyle(fontSize: 40),
               textAlign: TextAlign.center,
@@ -138,10 +140,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('2'),
+                    onPressed: () {
+                      _onPressed('2');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '2',
                       style: TextStyle(fontSize: 40),
@@ -157,10 +162,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('3'),
+                    onPressed: () {
+                      _onPressed('3');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '3',
                       style: TextStyle(fontSize: 40),
@@ -181,10 +189,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('4'),
+                    onPressed: () {
+                      _onPressed('4');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '4',
                       style: TextStyle(fontSize: 40),
@@ -200,10 +211,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('5'),
+                    onPressed: () {
+                      _onPressed('5');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '5',
                       style: TextStyle(fontSize: 40),
@@ -219,10 +233,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('6'),
+                    onPressed: () {
+                      _onPressed('6');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '6',
                       style: TextStyle(fontSize: 40),
@@ -243,10 +260,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('7'),
+                    onPressed: () {
+                      _onPressed('7');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '7',
                       style: TextStyle(fontSize: 40),
@@ -262,10 +282,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('8'),
+                    onPressed: () {
+                      _onPressed('8');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '8',
                       style: TextStyle(fontSize: 40),
@@ -281,10 +304,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('9'),
+                    onPressed: () {
+                      _onPressed('9');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '9',
                       style: TextStyle(fontSize: 40),
@@ -312,10 +338,13 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.0), // 외곽선의 두께 설정
+                        BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('0'),
+                    onPressed: () {
+                      _onPressed('0');
+                      _currentPassWord = '.';
+                    },
                     child: const Text(
                       '0',
                       style: TextStyle(fontSize: 40),
@@ -331,7 +360,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                       style: ButtonStyle(
                         side: MaterialStateProperty.all<BorderSide>(
-                          BorderSide(width: 1.0), // 외곽선의 두께 설정
+                          BorderSide(width: 1.2), // 외곽선의 두께 설정
                         ),
                       ),
                       onPressed: () => _onBackspace(),
