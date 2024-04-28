@@ -13,21 +13,24 @@ class CheckScreen extends StatefulWidget {
 class _CheckScreenState extends State<CheckScreen> {
   DateTime _dateTime = DateTime.now();
   Timer? _timer;
-  TextEditingController? _textEditingController;
   String _currentNumber = '';
   String _previousNumber = '';
+  String _currentPassWord = '';
+  String _previousPassWord = '* * * *';
 
-
-
-  void _onPressed(String textEditingContorller) {
+  void _onPressed(String textEditingController) {
+    if(_previousNumber.length == 0)
+      {
+        _previousPassWord = '';
+      }
     setState(() {
       if (_previousNumber.length < 4) {
-        _currentNumber = textEditingContorller;
-        _previousNumber +=  _currentNumber;
-
+        _currentNumber = textEditingController;
+        _previousNumber += _currentNumber;
+        _previousPassWord += _currentPassWord;
         // print(_previousNumber);
       }
-      if(_previousNumber.length == 4) {
+      if (_previousNumber.length == 4) {
         //Todo firebase에 값을 보낸다.
       }
     });
@@ -36,7 +39,8 @@ class _CheckScreenState extends State<CheckScreen> {
   void _onBackspace() {
     setState(() {
       if (_previousNumber.isNotEmpty) {
-        _previousNumber = _previousNumber.substring(0, _previousNumber.length - 1); // Remove the last character
+        _previousNumber = _previousNumber.substring(
+            0, _previousNumber.length - 1); // Remove the last character
         // print(_previousNumber);
       }
     });
@@ -46,6 +50,7 @@ class _CheckScreenState extends State<CheckScreen> {
   void initState() {
     super.initState();
     _updateDateTime();
+
   }
 
   void _updateDateTime() {
@@ -59,14 +64,14 @@ class _CheckScreenState extends State<CheckScreen> {
   @override
   void dispose() {
     _timer?.cancel();
-    _timer!.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     //Todo passWord 숫자의 변화하게 하는 것 고치기
-    String passWordNumber = '* * * *';
+
+    final controller = TextEditingController(text: _previousPassWord );
 
     return Scaffold(
       appBar: AppBar(
@@ -89,18 +94,17 @@ class _CheckScreenState extends State<CheckScreen> {
             height: 50,
             decoration:
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
-            child: const Center(
-              child: Text(
-                '$passWordNumber',
-                style: TextStyle(fontSize: 40),
-              ),
+            child: TextField(
+
+              controller: controller,
+              style: TextStyle(fontSize: 40),
+              textAlign: TextAlign.center,
+              readOnly: true,
             ),
           ),
           const SizedBox(
             height: 70,
           ),
-
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -115,7 +119,10 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: () => _onPressed('1'),
+                    onPressed: () {
+                      _currentPassWord = '.';
+                      _onPressed('1');
+                    },
                     child: const Text(
                       '1',
                       style: TextStyle(fontSize: 40),
@@ -134,7 +141,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: ()  => _onPressed('2'),
+                    onPressed: () => _onPressed('2'),
                     child: const Text(
                       '2',
                       style: TextStyle(fontSize: 40),
@@ -177,7 +184,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: ()  => _onPressed('4'),
+                    onPressed: () => _onPressed('4'),
                     child: const Text(
                       '4',
                       style: TextStyle(fontSize: 40),
@@ -196,7 +203,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: ()  => _onPressed('5'),
+                    onPressed: () => _onPressed('5'),
                     child: const Text(
                       '5',
                       style: TextStyle(fontSize: 40),
@@ -215,7 +222,7 @@ class _CheckScreenState extends State<CheckScreen> {
                         BorderSide(width: 1.0), // 외곽선의 두께 설정
                       ),
                     ),
-                    onPressed: ()  => _onPressed('6'),
+                    onPressed: () => _onPressed('6'),
                     child: const Text(
                       '6',
                       style: TextStyle(fontSize: 40),
