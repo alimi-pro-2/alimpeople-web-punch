@@ -9,22 +9,6 @@ import 'data/repository/firebase_academy_repository_impl.dart';
 import 'firebase_options.dart';
 
 
-final GoRouter _router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    // 첫 번째 스크린
-    GoRoute(
-      path: '/',
-      builder: (context, state) => FirstScreen(),
-    ),
-    // 두 번째 스크린
-    GoRoute(
-      path: '/second',
-      builder: (context, state) => LoginScreen(),
-    ),
-  ],
-);
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -39,9 +23,29 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final GoRouter _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      // 첫 번째 스크린
+      GoRoute(
+        path: '/',
+        builder: (context, state) => FirstScreen(),
+      ),
+      // 두 번째 스크린
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: '/check',
+        builder: (context, state) => CheckScreen(academyRepository: /*Todo academy레파지토리에 들어갈 코드 작성 */),
+      ),
+    ],
+  );
+
   final FirebaseFirestore db;
 
-  const MyApp({
+  MyApp({
     super.key,
     required this.db,
   });
@@ -50,18 +54,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: _router,
+      routerDelegate: _router.routerDelegate,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // home: CheckScreen(
-        //   academyRepository: FirebaseAcademyRepositoryImpl(
-        //     uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1',
-        //     firebaseFirestore: db,
-        //   ),
-        // ),
       );
 
   }

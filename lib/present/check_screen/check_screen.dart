@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:alimpeople_web_punch/data/repository/firebase_academy_repository_impl.dart';
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CheckScreen extends StatefulWidget {
   final AcademyRepository academyRepository;
@@ -23,7 +22,7 @@ class _CheckScreenState extends State<CheckScreen> {
   String _previousPassWord = '* * * *';
 
   void _onPressed(String textEditingController) {
-    if (_previousNumber.length == 0) {
+    if (_previousNumber.isEmpty) {
       _previousPassWord = '';
     }
     setState(() {
@@ -72,8 +71,6 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //Todo passWord 숫자의 변화하게 하는 것 고치기
-
     final controller = TextEditingController(text: _previousPassWord);
 
     return Scaffold(
@@ -112,7 +109,7 @@ class _CheckScreenState extends State<CheckScreen> {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -134,7 +131,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -156,7 +153,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -183,7 +180,7 @@ class _CheckScreenState extends State<CheckScreen> {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -205,7 +202,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -227,7 +224,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -254,7 +251,7 @@ class _CheckScreenState extends State<CheckScreen> {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -276,7 +273,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -298,7 +295,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -325,14 +322,14 @@ class _CheckScreenState extends State<CheckScreen> {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                 ),
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -354,7 +351,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   height: 80,
                   child: OutlinedButton(
@@ -378,13 +375,6 @@ class _CheckScreenState extends State<CheckScreen> {
                 flex: 1,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text(
-                    '등원',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.blue),
@@ -392,25 +382,32 @@ class _CheckScreenState extends State<CheckScreen> {
                       Size(200, 90),
                     ),
                   ),
+                  child: Text(
+                    '등원',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text(
-                    '하원',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
+                  ),
+                  child: Text(
+                    '하원',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
