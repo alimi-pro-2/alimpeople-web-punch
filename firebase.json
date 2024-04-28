@@ -1,0 +1,45 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "alimi-pro-2-3b2fb",
+          "appId": "1:440988943055:android:a76657905ed9ff53d26dba",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "alimi-pro-2-3b2fb",
+          "configurations": {
+            "android": "1:440988943055:android:a76657905ed9ff53d26dba",
+            "ios": "1:440988943055:ios:ece8070066c49129d26dba",
+            "web": "1:440988943055:web:a645e911c0d6fa47d26dba"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
+}
