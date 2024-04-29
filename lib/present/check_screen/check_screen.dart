@@ -429,7 +429,10 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.blue),
@@ -449,7 +452,10 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),
