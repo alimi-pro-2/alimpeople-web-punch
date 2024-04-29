@@ -20,7 +20,7 @@ class _CheckScreenState extends State<CheckScreen> {
   String _previousNumber = '';
   final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
-  final List<String> _punchList= [];
+  final List<String> _punchList = [];
 
   void _onPressed(String textEditingController) {
     if (_previousNumber.isEmpty) {
@@ -28,7 +28,7 @@ class _CheckScreenState extends State<CheckScreen> {
     }
 
     setState(
-          () {
+      () {
         if (_previousNumber.length < 4) {
           _currentNumber = textEditingController;
           _previousNumber += _currentNumber;
@@ -41,20 +41,17 @@ class _CheckScreenState extends State<CheckScreen> {
       // print(_previousNumber);
       _checkStudentName();
     }
-    );
   }
-  Future<void> _checkStudentName() async {
 
+  Future<void> _checkStudentName() async {
     try {
       // CheckViewModel 클래스의 인스턴스 생성
-      CheckViewModel checkViewModel = CheckViewModel(
-          repository: widget.academyRepository);
+      CheckViewModel checkViewModel =
+          CheckViewModel(repository: widget.academyRepository);
 
-
-      final studentNames = await checkViewModel.getCheckStudent(
-          _previousNumber);
-      final parentsNumber = await checkViewModel.pushToStudent(
-          _previousNumber);
+      final studentNames =
+          await checkViewModel.getCheckStudent(_previousNumber);
+      final parentsNumber = await checkViewModel.pushToStudent(_previousNumber);
 
       if (studentNames.isNotEmpty) {
         // 팝업으로 학생의 이름을 표시
@@ -69,10 +66,8 @@ class _CheckScreenState extends State<CheckScreen> {
                 child: ListView.builder(
                   itemCount: studentNames.length,
                   itemBuilder: (BuildContext context, int index) {
-
                     return TextButton(
                       onPressed: () {
-
                         Navigator.of(context).pop();
                         _punchList.add(studentNames[index]);
                         _punchList.add(parentsNumber[index]);
@@ -80,7 +75,9 @@ class _CheckScreenState extends State<CheckScreen> {
                         // 여기에 버튼 기능 추가
                       },
                       child: Text(
-                        studentNames[index], style: TextStyle(fontSize: 32),),
+                        studentNames[index],
+                        style: TextStyle(fontSize: 32),
+                      ),
                     );
                   },
                 ),
@@ -103,7 +100,6 @@ class _CheckScreenState extends State<CheckScreen> {
     } catch (e) {
       // 오류 처리
       print('학생 이름을 확인하는 중 오류 발생: $e');
-
     }
   }
 
@@ -112,9 +108,9 @@ class _CheckScreenState extends State<CheckScreen> {
       if (_previousNumber.isNotEmpty) {
         _previousNumber =
             _previousNumber.substring(0, _previousNumber.length - 1);
-        _previousPassWord = _previousPassWord.substring(
-            0, _previousPassWord.length - 1);
-        print(_previousNumber);   // Remove the last character
+        _previousPassWord =
+            _previousPassWord.substring(0, _previousPassWord.length - 1);
+        print(_previousNumber); // Remove the last character
       }
     });
   }
@@ -152,9 +148,7 @@ class _CheckScreenState extends State<CheckScreen> {
         children: [
           Center(
             child: Text(
-              '날짜: ${_dateTime.year}년 ${_dateTime.month}월 ${_dateTime
-                  .day}일  ${_dateTime.hour}:${_dateTime.minute}:${_dateTime
-                  .second}',
+              '날짜: ${_dateTime.year}년 ${_dateTime.month}월 ${_dateTime.day}일  ${_dateTime.hour}:${_dateTime.minute}:${_dateTime.second}',
               style: const TextStyle(fontSize: 20),
             ),
           ),
@@ -165,7 +159,7 @@ class _CheckScreenState extends State<CheckScreen> {
             width: 200,
             height: 50,
             decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
+                BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
               controller: controller,
               style: TextStyle(fontSize: 40),
@@ -439,7 +433,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.blue),
+                        MaterialStateProperty.all<Color>(Colors.blue),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
@@ -459,7 +453,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.red),
+                        MaterialStateProperty.all<Color>(Colors.red),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
