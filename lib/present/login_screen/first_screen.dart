@@ -42,7 +42,7 @@ class FirstScreen extends StatelessWidget {
             ),
             child: TextButton(
               onPressed: () {
-                GoRouter.of(context).go('/login');
+                GoRouter.of(context).go('/check');
               },
               child: Text('출결체크기 로그인'),
             ),
