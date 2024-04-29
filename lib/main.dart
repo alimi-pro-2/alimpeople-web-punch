@@ -8,22 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'data/repository/firebase_academy_repository_impl.dart';
 import 'firebase_options.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  // 안드로이드 제외 ios, web 실행 주소
-  // final db = FirebaseFirestore.instance
-  //   ..useFirestoreEmulator('localhost', 8080);
-  // 안드로이드 에뮬레이터 실행 주소
-  // final db = FirebaseFirestore.instance..useFirestoreEmulator('10.0.2.2', 8080);
-
-  runApp(MyApp());
-}
-
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
@@ -40,20 +24,31 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/check',
       builder: (context, state) {
-        final db = FirebaseFirestore.instance
-          ..useFirestoreEmulator('localhost', 8080);
-        return CheckScreen(
-          academyRepository: FirebaseAcademyRepositoryImpl(
-              uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db),
-        );
+        final db = FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080);
+        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
       },
     ),
   ],
 );
 
-class MyApp extends StatelessWidget {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // 안드로이드 제외 ios, web 실행 주소
+  // final db = FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080);
+  // 안드로이드 에뮬레이터 실행 주소
+  // final db = FirebaseFirestore.instance..useFirestoreEmulator('10.0.2.2', 8080);
 
-  const MyApp({
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  
+
+
+  MyApp({
     super.key,
   });
 
@@ -61,12 +56,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: _router,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-    );
+      routerDelegate: _router.routerDelegate,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+      );
+
   }
 }

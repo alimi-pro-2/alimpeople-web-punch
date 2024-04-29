@@ -41,13 +41,15 @@ class _CheckScreenState extends State<CheckScreen> {
       // print(_previousNumber);
       _checkStudentName();
     }
+    );
   }
-
   Future<void> _checkStudentName() async {
+
     try {
       // CheckViewModel 클래스의 인스턴스 생성
       CheckViewModel checkViewModel = CheckViewModel(
           repository: widget.academyRepository);
+
 
       final studentNames = await checkViewModel.getCheckStudent(
           _previousNumber);
@@ -101,6 +103,7 @@ class _CheckScreenState extends State<CheckScreen> {
     } catch (e) {
       // 오류 처리
       print('학생 이름을 확인하는 중 오류 발생: $e');
+
     }
   }
 
@@ -109,9 +112,9 @@ class _CheckScreenState extends State<CheckScreen> {
       if (_previousNumber.isNotEmpty) {
         _previousNumber =
             _previousNumber.substring(0, _previousNumber.length - 1);
-        _previousPassWord =
-            _previousPassWord.substring(0, _previousPassWord.length - 1);
-        print(_previousNumber); // Remove the last character
+        _previousPassWord = _previousPassWord.substring(
+            0, _previousPassWord.length - 1);
+        print(_previousNumber);   // Remove the last character
       }
     });
   }
