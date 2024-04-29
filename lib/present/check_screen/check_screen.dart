@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:alimpeople_web_punch/data/repository/firebase_academy_repository_impl.dart';
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class CheckScreen extends StatefulWidget {
@@ -19,79 +18,92 @@ class _CheckScreenState extends State<CheckScreen> {
   Timer? _timer;
   String _currentNumber = '';
   String _previousNumber = '';
-  String _currentPassWord = '.';
+  final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
+  final List<String> _punchList= [];
 
   void _onPressed(String textEditingController) {
     if (_previousNumber.isEmpty) {
       _previousPassWord = '';
     }
 
-    setState(() {
-      if (_previousNumber.length < 4) {
-        _currentNumber = textEditingController;
-        _previousNumber += _currentNumber;
-        _previousPassWord += _currentPassWord;
-        print(_previousNumber);
-      }
-      if (_previousNumber.length == 4) {
-        print(_previousNumber);
-        _checkStudentName();
-      }
+    setState(
+          () {
+        if (_previousNumber.length < 4) {
+          _currentNumber = textEditingController;
+          _previousNumber += _currentNumber;
+          _previousPassWord += _currentPassWord;
+          print(_previousNumber);
+        }
+      },
+    );
+    if (_previousNumber.length == 4) {
+      // print(_previousNumber);
+      _checkStudentName();
     }
     );
   }
   Future<void> _checkStudentName() async {
-    // Firestore에서 학생의 PIN 번호를 가져옴
-    final snapshot = await FirebaseFirestore.instance
-        .collection('Students')
-        .where('pin', isEqualTo: _previousNumber)
-        .get();
 
-    // 학생의 이름을 저장할 리스트
-    List<String> studentNames = [];
+    try {
+      // CheckViewModel 클래스의 인스턴스 생성
+      CheckViewModel checkViewModel = CheckViewModel(
+          repository: widget.academyRepository);
 
-    // 학생의 PIN 번호와 일치하는 경우 이름을 리스트에 추가
-    snapshot.docs.forEach((doc) {
-      studentNames.add(doc['name']);
-    });
 
-    if (studentNames.isNotEmpty) {
-      // 팝업으로 학생의 이름을 표시
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('학생 이름'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // 학생 이름을 리스트뷰로 표시
-                ListView.builder(
-                  shrinkWrap: true,
+      final studentNames = await checkViewModel.getCheckStudent(
+          _previousNumber);
+      final parentsNumber = await checkViewModel.pushToStudent(
+          _previousNumber);
+
+      if (studentNames.isNotEmpty) {
+        // 팝업으로 학생의 이름을 표시
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('학생 이름'),
+              content: SizedBox(
+                width: 200,
+                height: 200,
+                child: ListView.builder(
                   itemCount: studentNames.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(studentNames[index]),
+
+                    return TextButton(
+                      onPressed: () {
+
+                        Navigator.of(context).pop();
+                        _punchList.add(studentNames[index]);
+                        _punchList.add(parentsNumber[index]);
+                        print(_punchList);
+                        // 여기에 버튼 기능 추가
+                      },
+                      child: Text(
+                        studentNames[index], style: TextStyle(fontSize: 32),),
                     );
                   },
                 ),
-              ],
-            ),
-            actions: <Widget>[
-              // 팝업 닫기 버튼
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('닫기'),
               ),
-            ],
-          );
-        },
-      );
-    } else if (studentNames.isEmpty){
-      print('해당되는 학생이 없습니다.');
+              actions: <Widget>[
+                // 팝업 닫기 버튼
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        print('해당되는 학생이 없습니다.');
+      }
+    } catch (e) {
+      // 오류 처리
+      print('학생 이름을 확인하는 중 오류 발생: $e');
+
     }
   }
 
@@ -140,7 +152,9 @@ class _CheckScreenState extends State<CheckScreen> {
         children: [
           Center(
             child: Text(
-              '날짜: ${_dateTime.year}년 ${_dateTime.month}월 ${_dateTime.day}일  ${_dateTime.hour}:${_dateTime.minute}:${_dateTime.second}',
+              '날짜: ${_dateTime.year}년 ${_dateTime.month}월 ${_dateTime
+                  .day}일  ${_dateTime.hour}:${_dateTime.minute}:${_dateTime
+                  .second}',
               style: const TextStyle(fontSize: 20),
             ),
           ),
