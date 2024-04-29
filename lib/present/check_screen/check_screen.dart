@@ -27,27 +27,25 @@ class _CheckScreenState extends State<CheckScreen> {
       _previousPassWord = '';
     }
 
-    setState(
-      () {
-        if (_previousNumber.length < 4) {
-          _currentNumber = textEditingController;
-          _previousNumber += _currentNumber;
-          _previousPassWord += _currentPassWord;
-          print(_previousNumber);
-        }
-      },
-    );
-    if (_previousNumber.length == 4) {
-      print(_previousNumber);
-      _checkStudentName();
+    setState(() {
+      if (_previousNumber.length < 4) {
+        _currentNumber = textEditingController;
+        _previousNumber += _currentNumber;
+        _previousPassWord += _currentPassWord;
+        print(_previousNumber);
+      }
+      if (_previousNumber.length == 4) {
+        print(_previousNumber);
+        _checkStudentName();
+      }
     }
+    );
   }
-
   Future<void> _checkStudentName() async {
     // Firestore에서 학생의 PIN 번호를 가져옴
     final snapshot = await FirebaseFirestore.instance
         .collection('Students')
-        .where('pin', isEqualTo: 3729)
+        .where('pin', isEqualTo: _previousNumber)
         .get();
 
     // 학생의 이름을 저장할 리스트
@@ -57,7 +55,6 @@ class _CheckScreenState extends State<CheckScreen> {
     snapshot.docs.forEach((doc) {
       studentNames.add(doc['name']);
     });
-    print(studentNames);
 
     if (studentNames.isNotEmpty) {
       // 팝업으로 학생의 이름을 표시
@@ -66,24 +63,20 @@ class _CheckScreenState extends State<CheckScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('학생 이름'),
-            content: SizedBox(
-              width: 200,
-              height: 200,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // 학생 이름을 리스트뷰로 표시
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: studentNames.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(studentNames[index]),
-                      );
-                    },
-                  ),
-                ],
-              ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 학생 이름을 리스트뷰로 표시
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: studentNames.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(studentNames[index]),
+                    );
+                  },
+                ),
+              ],
             ),
             actions: <Widget>[
               // 팝업 닫기 버튼
@@ -97,7 +90,7 @@ class _CheckScreenState extends State<CheckScreen> {
           );
         },
       );
-    } else  {
+    } else if (studentNames.isEmpty){
       print('해당되는 학생이 없습니다.');
     }
   }
@@ -107,9 +100,9 @@ class _CheckScreenState extends State<CheckScreen> {
       if (_previousNumber.isNotEmpty) {
         _previousNumber =
             _previousNumber.substring(0, _previousNumber.length - 1);
-        _previousPassWord =
-            _previousPassWord.substring(0, _previousPassWord.length - 1);
-        print(_previousNumber); // Remove the last character
+        _previousPassWord = _previousPassWord.substring(
+            0, _previousPassWord.length - 1);
+        print(_previousNumber);   // Remove the last character
       }
     });
   }
@@ -158,7 +151,7 @@ class _CheckScreenState extends State<CheckScreen> {
             width: 200,
             height: 50,
             decoration:
-                BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
+            BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
               controller: controller,
               style: TextStyle(fontSize: 40),
@@ -429,13 +422,10 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {
-
-
-                  },
+                  onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue),
+                    MaterialStateProperty.all<Color>(Colors.blue),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
@@ -452,13 +442,10 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {
-
-
-                  },
+                  onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red),
+                    MaterialStateProperty.all<Color>(Colors.red),
                     minimumSize: MaterialStateProperty.all(
                       Size(200, 90),
                     ),
