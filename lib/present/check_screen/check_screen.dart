@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:alimpeople_web_punch/data/repository/firebase_academy_repository_impl.dart';
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
 import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CheckScreen extends StatefulWidget {
@@ -20,9 +18,9 @@ class _CheckScreenState extends State<CheckScreen> {
   Timer? _timer;
   String _currentNumber = '';
   String _previousNumber = '';
-  String _currentPassWord = '.';
+  final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
-  List<String> _punchList= [];
+  final List<String> _punchList= [];
 
   void _onPressed(String textEditingController) {
     if (_previousNumber.isEmpty) {
