@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:alimpeople_web_punch/data/repository/firebase_academy_repository_impl.dart';
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
+import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -38,67 +39,61 @@ class _CheckScreenState extends State<CheckScreen> {
       },
     );
     if (_previousNumber.length == 4) {
-      print(_previousNumber);
+      // print(_previousNumber);
       _checkStudentName();
     }
   }
-
   Future<void> _checkStudentName() async {
-    // Firestore에서 학생의 PIN 번호를 가져옴
-    final snapshot = await FirebaseFirestore.instance
-        .collection('Students')
-        .where('pin', isEqualTo: 3729)
-        .get();
+    try {
+      // CheckViewModel 클래스의 인스턴스 생성
+      CheckViewModel checkViewModel = CheckViewModel(repository: widget.academyRepository);
 
-    // 학생의 이름을 저장할 리스트
-    List<String> studentNames = [];
+      final studentNames = await checkViewModel.getCheckStudent(_previousNumber);
 
-    // 학생의 PIN 번호와 일치하는 경우 이름을 리스트에 추가
-    snapshot.docs.forEach((doc) {
-      studentNames.add(doc['name']);
-    });
-    print(studentNames);
-
-    if (studentNames.isNotEmpty) {
-      // 팝업으로 학생의 이름을 표시
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('학생 이름'),
-            content: SizedBox(
-              width: 200,
-              height: 200,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // 학생 이름을 리스트뷰로 표시
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: studentNames.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(studentNames[index]),
-                      );
-                    },
-                  ),
-                ],
+      if (studentNames.isNotEmpty) {
+        // 팝업으로 학생의 이름을 표시
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('학생 이름'),
+              content: SizedBox(
+                width: 200,
+                height: 200,
+                child: ListView.builder(
+                  itemCount: studentNames.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return TextButton(
+                      onPressed: () {
+                        // 여기에 버튼 기능 추가
+                        // print('버튼이 눌렸습니다: ${studentNames[index]}');
+                      },
+                      child: Text(studentNames[index], style: TextStyle(fontSize: 32),),
+                    );
+                  },
+                ),
               ),
-            ),
-            actions: <Widget>[
-              // 팝업 닫기 버튼
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('닫기'),
-              ),
-            ],
-          );
-        },
-      );
-    } else  {
-      print('해당되는 학생이 없습니다.');
+              actions: <Widget>[
+                // 팝업 닫기 버튼
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            );
+          },
+        );
+
+
+
+      } else {
+        print('해당되는 학생이 없습니다.');
+      }
+    } catch (e) {
+      // 오류 처리
+      print('학생 이름을 확인하는 중 오류 발생: $e');
     }
   }
 

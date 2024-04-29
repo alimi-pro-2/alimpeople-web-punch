@@ -12,7 +12,10 @@ class Student with _$Student {
     required String parentsPhone1,
     String? parentsPhone2,
     String? parentsPhone3,
+    required String PIN,
   }) = _Student;
 
   factory Student.fromJson(Map<String, Object?> json) => _$StudentFromJson(json);
+
+
 }

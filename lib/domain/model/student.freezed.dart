@@ -26,6 +26,7 @@ mixin _$Student {
   String get parentsPhone1 => throw _privateConstructorUsedError;
   String? get parentsPhone2 => throw _privateConstructorUsedError;
   String? get parentsPhone3 => throw _privateConstructorUsedError;
+  String get PIN => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $StudentCopyWith<$Res> {
       String name,
       String parentsPhone1,
       String? parentsPhone2,
-      String? parentsPhone3});
+      String? parentsPhone3,
+      String PIN});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
     Object? parentsPhone1 = null,
     Object? parentsPhone2 = freezed,
     Object? parentsPhone3 = freezed,
+    Object? PIN = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,6 +88,10 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.parentsPhone3
           : parentsPhone3 // ignore: cast_nullable_to_non_nullable
               as String?,
+      PIN: null == PIN
+          ? _value.PIN
+          : PIN // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -101,7 +108,8 @@ abstract class _$$StudentImplCopyWith<$Res> implements $StudentCopyWith<$Res> {
       String name,
       String parentsPhone1,
       String? parentsPhone2,
-      String? parentsPhone3});
+      String? parentsPhone3,
+      String PIN});
 }
 
 /// @nodoc
@@ -120,6 +128,7 @@ class __$$StudentImplCopyWithImpl<$Res>
     Object? parentsPhone1 = null,
     Object? parentsPhone2 = freezed,
     Object? parentsPhone3 = freezed,
+    Object? PIN = null,
   }) {
     return _then(_$StudentImpl(
       id: null == id
@@ -142,6 +151,10 @@ class __$$StudentImplCopyWithImpl<$Res>
           ? _value.parentsPhone3
           : parentsPhone3 // ignore: cast_nullable_to_non_nullable
               as String?,
+      PIN: null == PIN
+          ? _value.PIN
+          : PIN // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -154,7 +167,8 @@ class _$StudentImpl implements _Student {
       required this.name,
       required this.parentsPhone1,
       this.parentsPhone2,
-      this.parentsPhone3});
+      this.parentsPhone3,
+      required this.PIN});
 
   factory _$StudentImpl.fromJson(Map<String, dynamic> json) =>
       _$$StudentImplFromJson(json);
@@ -170,10 +184,12 @@ class _$StudentImpl implements _Student {
   final String? parentsPhone2;
   @override
   final String? parentsPhone3;
+  @override
+  final String PIN;
 
   @override
   String toString() {
-    return 'Student(id: $id, name: $name, parentsPhone1: $parentsPhone1, parentsPhone2: $parentsPhone2, parentsPhone3: $parentsPhone3)';
+    return 'Student(id: $id, name: $name, parentsPhone1: $parentsPhone1, parentsPhone2: $parentsPhone2, parentsPhone3: $parentsPhone3, PIN: $PIN)';
   }
 
   @override
@@ -188,13 +204,14 @@ class _$StudentImpl implements _Student {
             (identical(other.parentsPhone2, parentsPhone2) ||
                 other.parentsPhone2 == parentsPhone2) &&
             (identical(other.parentsPhone3, parentsPhone3) ||
-                other.parentsPhone3 == parentsPhone3));
+                other.parentsPhone3 == parentsPhone3) &&
+            (identical(other.PIN, PIN) || other.PIN == PIN));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, parentsPhone1, parentsPhone2, parentsPhone3);
+      runtimeType, id, name, parentsPhone1, parentsPhone2, parentsPhone3, PIN);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +233,8 @@ abstract class _Student implements Student {
       required final String name,
       required final String parentsPhone1,
       final String? parentsPhone2,
-      final String? parentsPhone3}) = _$StudentImpl;
+      final String? parentsPhone3,
+      required final String PIN}) = _$StudentImpl;
 
   factory _Student.fromJson(Map<String, dynamic> json) = _$StudentImpl.fromJson;
 
@@ -231,6 +249,8 @@ abstract class _Student implements Student {
   String? get parentsPhone2;
   @override
   String? get parentsPhone3;
+  @override
+  String get PIN;
   @override
   @JsonKey(ignore: true)
   _$$StudentImplCopyWith<_$StudentImpl> get copyWith =>
