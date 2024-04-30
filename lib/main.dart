@@ -56,13 +56,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: _router.routerDelegate,
-        title: 'Flutter Demo',
+      routerConfig: _router,
+        title: 'Alimi Pro Ver.2',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
       );
-
   }
 }
