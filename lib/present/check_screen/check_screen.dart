@@ -18,7 +18,7 @@ class _CheckScreenState extends State<CheckScreen> {
   Timer? _timer;
   String _currentNumber = '';
   String _previousNumber = '';
-  final String _currentPassWord = '.';
+  final String _currentPassWord = 'º';
   String _previousPassWord = '* * * *';
   final List<String> _punchList = [];
 
@@ -162,7 +162,7 @@ class _CheckScreenState extends State<CheckScreen> {
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
               controller: controller,
-              style: TextStyle(fontSize: 40),
+              style: TextStyle(fontSize: 35),
               textAlign: TextAlign.center,
               readOnly: true,
             ),
