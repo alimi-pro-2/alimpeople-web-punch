@@ -1,11 +1,36 @@
-import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
+import 'package:alimpeople_web_punch/present/login_screen/sing_up_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../data/repository/firebase_academy_repository_impl.dart';
+import '../check_screen/check_screen.dart';
+
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  LoginScreen({super.key});
+  Future<void> signInWithFirebase(BuildContext context) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _idController.text,
+        password: _pwController.text,
+      );
+
+      // 로그인에 성공하면 CheckScreen으로 이동
+      GoRouter.of(context).go('/check',);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      throw e;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +38,42 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Master Login'),
       ),
-      body: Row(
+      body: Column(
         children: [
-          Center(
+          SizedBox(
+            width: 250,
+            height: 50,
             child: TextField(
               controller: _idController,
-              decoration:
-              const InputDecoration(labelText: '아이디', hintText: '아이디를 입력하세요'),
+              decoration: const InputDecoration(
+                  labelText: '아이디',
+                  labelStyle: TextStyle(fontSize: 10),
+                  hintText: '아이디를 입력하세요'),
             ),
           ),
-          Center(
+          SizedBox(
+            width: 250,
+            height: 50,
             child: TextField(
               controller: _pwController,
-              decoration:
-              const InputDecoration(labelText: '비밀번호', hintText: '비밀번호를 입력하세요'),
+              decoration: const InputDecoration(
+                  labelText: '비밀번호',
+                  labelStyle: TextStyle(fontSize: 10),
+                  hintText: '비밀번호를 입력하세요'),
             ),
+          ),
+          ElevatedButton(
+            onPressed: () => signInWithFirebase(context),
+            child: Text('로그인'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpScreen()),
+              );
+            },
+            child: Text('회원 가입'),
           ),
         ],
       ),
