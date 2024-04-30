@@ -6,11 +6,19 @@ import 'package:go_router/go_router.dart';
 import '../../data/repository/firebase_academy_repository_impl.dart';
 import '../check_screen/check_screen.dart';
 
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-class LoginScreen extends StatelessWidget {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _idController = TextEditingController();
+
   final TextEditingController _pwController = TextEditingController();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool _isPasswordVisible = false;
 
   Future<void> signInWithFirebase(BuildContext context) async {
     try {
@@ -20,7 +28,9 @@ class LoginScreen extends StatelessWidget {
       );
 
       // 로그인에 성공하면 CheckScreen으로 이동
-      GoRouter.of(context).go('/check',);
+      GoRouter.of(context).go(
+        '/check',
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -31,51 +41,70 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Master Login'),
+        title: const Text('Email Login'),
+        backgroundColor: Colors.blue,
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: 250,
-            height: 50,
-            child: TextField(
-              controller: _idController,
-              decoration: const InputDecoration(
-                  labelText: '아이디',
-                  labelStyle: TextStyle(fontSize: 10),
-                  hintText: '아이디를 입력하세요'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: TextField(
+                controller: _idController,
+                decoration: const InputDecoration(
+                    labelText: '아이디',
+                    labelStyle: TextStyle(fontSize: 10),
+                    hintText: '아이디를 입력하세요'),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 250,
-            height: 50,
-            child: TextField(
-              controller: _pwController,
-              decoration: const InputDecoration(
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: TextField(
+                controller: _pwController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
                   labelText: '비밀번호',
                   labelStyle: TextStyle(fontSize: 10),
-                  hintText: '비밀번호를 입력하세요'),
+                  hintText: '비밀번호를 입력하세요',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () => signInWithFirebase(context),
-            child: Text('로그인'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignUpScreen()),
-              );
-            },
-            child: Text('회원 가입'),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () => signInWithFirebase(context),
+                child: Text('로그인'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                GoRouter.of(context).go(
+                  '/signup',
+                );
+              },
+              child: Text('회원 가입'),
+            ),
+          ],
+        ),
       ),
     );
   }

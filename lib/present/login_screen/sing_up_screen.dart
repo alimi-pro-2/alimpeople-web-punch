@@ -1,11 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
+import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _idController = TextEditingController();
+
   final TextEditingController _pwController = TextEditingController();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool _isPasswordVisible = false;
 
   Future<void> signUpWithFirebase(BuildContext context) async {
     try {
@@ -13,9 +23,7 @@ class SignUpScreen extends StatelessWidget {
         email: _idController.text,
         password: _pwController.text,
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('회원 가입이 완료되었습니다.')),
-      );
+      GoRouter.of(context).go('/login',);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -34,36 +42,54 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('회원 가입'),
+        backgroundColor: Colors.blue,
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: 250,
-            height: 50,
-            child: TextField(
-              controller: _idController,
-              decoration: const InputDecoration(
-                  labelText: '아이디',
-                  labelStyle: TextStyle(fontSize: 10),
-                  hintText: '아이디를 입력하세요'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: TextField(
+                controller: _idController,
+                decoration: const InputDecoration(
+                    labelText: '아이디',
+                    labelStyle: TextStyle(fontSize: 10),
+                    hintText: '아이디를 입력하세요'),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 250,
-            height: 50,
-            child: TextField(
-              controller: _pwController,
-              decoration: const InputDecoration(
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: TextField(
+                controller: _pwController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
                   labelText: '비밀번호',
                   labelStyle: TextStyle(fontSize: 10),
-                  hintText: '비밀번호를 입력하세요'),
+                  hintText: '비밀번호를 입력하세요',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () => signUpWithFirebase(context),
-            child: Text('회원 가입'),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () => signUpWithFirebase(context),
+              child: Text('회원 가입'),
+            ),
+          ],
+        ),
       ),
     );
   }
