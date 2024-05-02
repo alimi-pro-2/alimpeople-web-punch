@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/model/academy.dart';
 import '../../domain/model/student.dart';
 
 class CheckViewModel with ChangeNotifier {
