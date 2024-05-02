@@ -51,11 +51,11 @@ class _CheckScreenState extends State<CheckScreen> {
   void _sendPunchLog() async {
     try {
       // CheckViewModel 클래스의 인스턴스 생성
-      CheckViewModel checkViewModel =
-      CheckViewModel(repository: widget.academyRepository);
+      CheckViewModel checkViewModel = CheckViewModel(repository: widget.academyRepository);
       Academy academy = await widget.academyRepository.getAcademy();
-      final parentsNumber = _punchList[1];
       final studentName = _punchList[0];
+      final parentsNumber = _punchList[1];
+
 
       // Firestore에 정보를 추가
       await FirebaseFirestore.instance.collection('punchLog').add({

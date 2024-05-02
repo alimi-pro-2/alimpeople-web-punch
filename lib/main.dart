@@ -30,12 +30,12 @@ final GoRouter _router = GoRouter(
         return SignUpScreen();
       },
     ),
-    //TODO 'hmMiHkM2e6EJ0Ey8UdQX7hs77iw8' 내 UID
+    //TODO 'hmMiHkM2e6EJ0Ey8UdQX7hs77iw8' 내 UID'KSm9vmT57KNDRb0QFWlZ0W416qs1'
     GoRoute(
       path: '/check',
       builder: (context, state) {
         final db = FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080);
-        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
+        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid:'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
       },
     ),
   ],
@@ -55,7 +55,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
+
 
 
   MyApp({
