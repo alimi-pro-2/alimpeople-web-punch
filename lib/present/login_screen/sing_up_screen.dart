@@ -1,44 +1,38 @@
-import 'package:alimpeople_web_punch/present/login_screen/sing_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../data/repository/firebase_academy_repository_impl.dart';
-import '../check_screen/check_screen.dart';
-
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _idController = TextEditingController();
 
   final TextEditingController _pwController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance..useAuthEmulator('localhost', 9099);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool _isPasswordVisible = false;
 
-  Future<void> signInWithFirebase(BuildContext context) async {
+  Future<void> signUpWithFirebase(BuildContext context) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: _idController.text,
         password: _pwController.text,
       );
-      // Todo: _auth.currentUser.uid
-      // Todo: GoRouterRedirect
-
-      // 로그인에 성공하면 CheckScreen으로 이동
-      GoRouter.of(context).go(
-        '/check',
-      );
+      GoRouter.of(context).go('/login',);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
+      throw e;
+    } catch (e) {
+      print(e);
       throw e;
     }
   }
@@ -47,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Email Login'),
+        title: const Text('회원 가입'),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
@@ -90,19 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => signInWithFirebase(context),
-                child: Text('로그인'),
-              ),
-            ),
             ElevatedButton(
-              onPressed: () {
-                GoRouter.of(context).go(
-                  '/signup',
-                );
-              },
+              onPressed: () => signUpWithFirebase(context),
               child: Text('회원 가입'),
             ),
           ],

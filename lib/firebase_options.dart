@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDNBTwkTwO0A6OSWA9eS0tkvSmtvgEo-KU',
-    appId: '1:440988943055:android:4fa5dba1d2d6af83d26dba',
+    appId: '1:440988943055:android:a76657905ed9ff53d26dba',
     messagingSenderId: '440988943055',
     projectId: 'alimi-pro-2-3b2fb',
     databaseURL: 'https://alimi-pro-2-3b2fb-default-rtdb.asia-southeast1.firebasedatabase.app',
@@ -68,11 +68,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC-pXskXOWqcC9a6N-K0HUzlqoaAv0lLF8',
-    appId: '1:440988943055:ios:38d02322e6845bb2d26dba',
+    appId: '1:440988943055:ios:ece8070066c49129d26dba',
     messagingSenderId: '440988943055',
     projectId: 'alimi-pro-2-3b2fb',
     databaseURL: 'https://alimi-pro-2-3b2fb-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'alimi-pro-2-3b2fb.appspot.com',
-    iosBundleId: 'com.example.alimpeopleWebPunch',
+    iosClientId: '440988943055-8qhasu1f0de9662a4c8bii4jarp6hmai.apps.googleusercontent.com',
+    iosBundleId: 'com.survivalcoding.alimiproMockData',
   );
+
 }

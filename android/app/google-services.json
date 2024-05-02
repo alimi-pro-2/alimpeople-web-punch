@@ -13,7 +13,12 @@
           "package_name": "com.example.alimpeople_web_punch"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "440988943055-l6k3ot6nm542476qons2gcfrvml0of8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDNBTwkTwO0A6OSWA9eS0tkvSmtvgEo-KU"
@@ -21,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440988943055-l6k3ot6nm542476qons2gcfrvml0of8a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440988943055-8qhasu1f0de9662a4c8bii4jarp6hmai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.survivalcoding.alimiproMockData"
+              }
+            }
+          ]
         }
       }
     },
@@ -32,7 +49,12 @@
           "package_name": "com.survivalcoding.alimipro_mock_data"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "440988943055-l6k3ot6nm542476qons2gcfrvml0of8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDNBTwkTwO0A6OSWA9eS0tkvSmtvgEo-KU"
@@ -40,7 +62,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440988943055-l6k3ot6nm542476qons2gcfrvml0of8a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440988943055-8qhasu1f0de9662a4c8bii4jarp6hmai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.survivalcoding.alimiproMockData"
+              }
+            }
+          ]
         }
       }
     }

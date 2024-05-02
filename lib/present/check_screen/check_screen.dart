@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
 import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../domain/model/academy.dart';
 
 class CheckScreen extends StatefulWidget {
   final AcademyRepository academyRepository;
@@ -20,26 +23,52 @@ class _CheckScreenState extends State<CheckScreen> {
   String _previousNumber = '';
   final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
-  final List<String> _punchList = [];
+  String _punchType = ''; // 등원 또는 하원 펀치 타입
+  static final List<String> _punchList = [];
+
+  void _onAttendanceButtonPressed(String punchType) async {
+    _punchType = punchType;
+  }
 
   void _onPressed(String textEditingController) {
     if (_previousNumber.isEmpty) {
       _previousPassWord = '';
     }
-
     setState(
-      () {
+          () {
         if (_previousNumber.length < 4) {
-          _currentNumber = textEditingController;
-          _previousNumber += _currentNumber;
-          _previousPassWord += _currentPassWord;
+          _previousNumber += textEditingController;
+          _previousPassWord += '*';
           print(_previousNumber);
         }
       },
     );
     if (_previousNumber.length == 4) {
-      // print(_previousNumber);
       _checkStudentName();
+    }
+  }
+
+  void _sendPunchLog() async {
+    try {
+      // CheckViewModel 클래스의 인스턴스 생성
+      CheckViewModel checkViewModel = CheckViewModel(repository: widget.academyRepository);
+      Academy academy = await widget.academyRepository.getAcademy();
+      final studentName = _punchList[0];
+      final parentsNumber = _punchList[1];
+
+
+      // Firestore에 정보를 추가
+      await FirebaseFirestore.instance.collection('punchLog').add({
+        'academy': academy.name, // 학원 이름
+        'name': studentName.isNotEmpty ? studentName : '', // 학생 이름
+        'parentPhone': parentsNumber.isNotEmpty ? parentsNumber : '', // 부모 전화번호
+        'punchType': _punchType, // 등원 또는 하원
+        'time': Timestamp.now(), // 현재 시간
+      });
+      print(Timestamp.now());
+      print('Punch log sent successfully.');
+    } catch (e) {
+      print('Error sending punch log: $e');
     }
   }
 
@@ -47,13 +76,13 @@ class _CheckScreenState extends State<CheckScreen> {
     try {
       // CheckViewModel 클래스의 인스턴스 생성
       CheckViewModel checkViewModel =
-          CheckViewModel(repository: widget.academyRepository);
+      CheckViewModel(repository: widget.academyRepository);
 
-      final studentNames =
-          await checkViewModel.getCheckStudent(_previousNumber);
-      final parentsNumber = await checkViewModel.pushToStudent(_previousNumber);
+      final studentName =
+      await checkViewModel.getCheckStudent(_previousNumber);
+      final parentNumber = await checkViewModel.PushToParentsNumbers(_previousNumber);
 
-      if (studentNames.isNotEmpty) {
+      if (studentName.isNotEmpty) {
         // 팝업으로 학생의 이름을 표시
         showDialog(
           context: context,
@@ -64,18 +93,20 @@ class _CheckScreenState extends State<CheckScreen> {
                 width: 200,
                 height: 200,
                 child: ListView.builder(
-                  itemCount: studentNames.length,
+                  itemCount: studentName.length,
                   itemBuilder: (BuildContext context, int index) {
                     return TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-                        _punchList.add(studentNames[index]);
-                        _punchList.add(parentsNumber[index]);
+                        _punchList.clear(); // Clear the previous data
+                        _punchList.add(studentName[index]);
+                        _punchList.add(parentNumber[index]);
                         print(_punchList);
-                        // 여기에 버튼 기능 추가
+                        _onAttendanceButtonPressed(_punchType); // Set the punch type
+                        _sendPunchLog(); // Send punch log
                       },
                       child: Text(
-                        studentNames[index],
+                        studentName[index],
                         style: TextStyle(fontSize: 32),
                       ),
                     );
@@ -102,6 +133,7 @@ class _CheckScreenState extends State<CheckScreen> {
       print('학생 이름을 확인하는 중 오류 발생: $e');
     }
   }
+
 
   void _onBackspace() {
     setState(() {
@@ -137,6 +169,8 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     final controller = TextEditingController(text: _previousPassWord);
 
     return Scaffold(
@@ -162,7 +196,7 @@ class _CheckScreenState extends State<CheckScreen> {
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
               controller: controller,
-              style: TextStyle(fontSize: 40),
+              style: TextStyle(fontSize: 35),
               textAlign: TextAlign.center,
               readOnly: true,
             ),
@@ -430,7 +464,9 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _onAttendanceButtonPressed('등원');
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.blue),
@@ -450,7 +486,9 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _onAttendanceButtonPressed('하원');
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),
