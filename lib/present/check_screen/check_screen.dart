@@ -64,7 +64,8 @@ class _CheckScreenState extends State<CheckScreen> {
         'time': Timestamp.now(), // 현재 시간
       });
       FlutterTts flutterTts = FlutterTts();
-      flutterTts.speak('$studentName이 $_punchType하였습니다.');
+      await flutterTts.setLanguage('ko-KR');
+      await flutterTts.speak('$studentName이 $_punchType하였습니다.');
 
       print('Punch log sent successfully.');
     } catch (e) {
