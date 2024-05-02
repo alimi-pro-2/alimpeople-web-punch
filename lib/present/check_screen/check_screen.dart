@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
 import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CheckScreen extends StatefulWidget {
@@ -18,15 +19,41 @@ class _CheckScreenState extends State<CheckScreen> {
   Timer? _timer;
   String _currentNumber = '';
   String _previousNumber = '';
-  final String _currentPassWord = 'º';
+  final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
-  final List<String> _punchList = [];
+  static final List<String> _punchList = [];
+
+//todo 학원 이름 가져오기, 
+  void _onAttendanceButtonPressed(bool isEntry) async {
+    try {
+      // CheckViewModel 클래스의 인스턴스 생성
+      CheckViewModel checkViewModel =
+      CheckViewModel(repository: widget.academyRepository);
+
+      final parentsNumber = _punchList[1];
+      final studentNames = _punchList[0];
+
+      final punchType = isEntry ? '등원' : '하원';
+
+      // Firestore에 정보를 추가
+      await FirebaseFirestore.instance.collection('punchLog').add({
+        'academy': '학원이름', // 학원 이름
+        'name': studentNames.isNotEmpty ? studentNames[0] : '', // 학생 이름
+        'parentPhone': parentsNumber.isNotEmpty ? parentsNumber[0] : '', // 부모 전화번호
+        'punchType': punchType, // 등원 또는 하원
+        'time': Timestamp.now(), // 현재 시간
+      });
+
+      print('Punch log sent successfully.');
+    } catch (e) {
+      print('Error sending punch log: $e');
+    }
+  }
 
   void _onPressed(String textEditingController) {
     if (_previousNumber.isEmpty) {
       _previousPassWord = '';
     }
-
     setState(
       () {
         if (_previousNumber.length < 4) {
@@ -51,7 +78,7 @@ class _CheckScreenState extends State<CheckScreen> {
 
       final studentNames =
           await checkViewModel.getCheckStudent(_previousNumber);
-      final parentsNumber = await checkViewModel.pushToStudent(_previousNumber);
+      final parentsNumber = await checkViewModel.PushToParentsNumbers(_previousNumber);
 
       if (studentNames.isNotEmpty) {
         // 팝업으로 학생의 이름을 표시
@@ -137,6 +164,8 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     final controller = TextEditingController(text: _previousPassWord);
 
     return Scaffold(
@@ -450,7 +479,9 @@ class _CheckScreenState extends State<CheckScreen> {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),

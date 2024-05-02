@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:alimpeople_web_punch/domain/repository/firebase_academy_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/model/student.dart';
@@ -33,7 +36,7 @@ class CheckViewModel with ChangeNotifier {
     }
   }
 
-  Future<List<String>> pushToStudent(String pin) async {
+  Future<List<String>> PushToParentsNumbers(String pin) async {
     try {
       final List<Student> students = await _repository.getStudents();
       List<String> parentsNumber = [];
@@ -51,4 +54,23 @@ class CheckViewModel with ChangeNotifier {
       rethrow; // 예외를 다시 throw하여 상위 레벨에서 처리할 수 있도록 함
     }
   }
+
+
+  Future<void> _sendPunchLogToFirestore(String academy, String name, String parentPhone, String punchType) async {
+    try {
+      // Firestore에 접근하여 'punchLog' 컬렉션에 데이터 추가
+      await FirebaseFirestore.instance.collection('punchLog').add({
+        'academy': academy, // 학원 이름
+        'name': name, // 학생 이름
+        'parentPhone': parentPhone, // 부모 전화번호
+        'punchType': punchType, // 등원 또는 하원
+        'time': Timestamp.now(), // 현재 시간
+      });
+      notifyListeners();
+      print('Punch log sent successfully.');
+    } catch (e) {
+      print('Error sending punch log: $e');
+    }
+  }
+
 }

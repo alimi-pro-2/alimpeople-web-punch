@@ -30,6 +30,7 @@ final GoRouter _router = GoRouter(
         return SignUpScreen();
       },
     ),
+    //TODO 'hmMiHkM2e6EJ0Ey8UdQX7hs77iw8' 내 UID
     GoRoute(
       path: '/check',
       builder: (context, state) {

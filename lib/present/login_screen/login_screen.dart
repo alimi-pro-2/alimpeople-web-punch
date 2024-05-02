@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _pwController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance..useAuthEmulator('localhost', 9099);
 
   bool _isPasswordVisible = false;
 
@@ -26,6 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _idController.text,
         password: _pwController.text,
       );
+      // Todo: _auth.currentUser.uid
+      // Todo: GoRouterRedirect
 
       // 로그인에 성공하면 CheckScreen으로 이동
       GoRouter.of(context).go(
