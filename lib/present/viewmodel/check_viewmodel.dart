@@ -17,17 +17,14 @@ class CheckViewModel with ChangeNotifier {
     try {
       final List<Student> students = await _repository.getStudents();
       List<String> studentNames = [];
-      // List<String> parentsNumber = [];
       // 학생 목록을 순회하며 학생의 PIN 번호를 비교하여 이름을 가져옴
       students.forEach((student) {
         if (student.PIN == pin) {
           studentNames.add(student.name);
-          // parentsNumber.add(student.parentsPhone1);
         }
       });
       // 학생 이름 목록을 출력 또는 사용
       print('해당 학생의 이름 목록: $studentNames');
-      // print('해당 학생 부모의 전화 목록: $parentsNumber');
       notifyListeners(); // 필요에 따라 상태를 변경하여 UI 업데이트
       return studentNames;
     } catch (e) {
@@ -56,28 +53,8 @@ class CheckViewModel with ChangeNotifier {
     }
   }
 
-  // Future<Academy> _academyPunch() async {
-  //   try {
-  //     final academy = await _repository.getAcademy();
-  //     Academy academyName = academy.name;
-  //   }
-  // }
 
-  Future<void> _sendPunchLogToFirestore(String academy, String name, String parentPhone, String punchType) async {
-    try {
-      // Firestore에 접근하여 'punchLog' 컬렉션에 데이터 추가
-      await FirebaseFirestore.instance.collection('punchLog').add({
-        'academy': academy, // 학원 이름
-        'name': name, // 학생 이름
-        'parentPhone': parentPhone, // 부모 전화번호
-        'punchType': punchType, // 등원 또는 하원
-        'time': Timestamp.now(), // 현재 시간
-      });
-      notifyListeners();
-      print('Punch log sent successfully.');
-    } catch (e) {
-      print('Error sending punch log: $e');
-    }
-  }
+
+
 
 }

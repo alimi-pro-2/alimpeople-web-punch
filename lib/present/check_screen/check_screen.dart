@@ -5,6 +5,8 @@ import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/model/academy.dart';
+
 class CheckScreen extends StatefulWidget {
   final AcademyRepository academyRepository;
 
@@ -51,13 +53,13 @@ class _CheckScreenState extends State<CheckScreen> {
       // CheckViewModel 클래스의 인스턴스 생성
       CheckViewModel checkViewModel =
       CheckViewModel(repository: widget.academyRepository);
-
+      Academy academy = await widget.academyRepository.getAcademy();
       final parentsNumber = _punchList[1];
       final studentName = _punchList[0];
 
       // Firestore에 정보를 추가
       await FirebaseFirestore.instance.collection('punchLog').add({
-        'academy': '학원이름', // 학원 이름
+        'academy': academy.name, // 학원 이름
         'name': studentName.isNotEmpty ? studentName : '', // 학생 이름
         'parentPhone': parentsNumber.isNotEmpty ? parentsNumber : '', // 부모 전화번호
         'punchType': _punchType, // 등원 또는 하원
