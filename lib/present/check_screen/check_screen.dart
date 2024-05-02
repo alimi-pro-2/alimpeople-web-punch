@@ -27,6 +27,7 @@ class _CheckScreenState extends State<CheckScreen> {
 
   void _onAttendanceButtonPressed(String punchType) async {
     _punchType = punchType;
+    await _checkStudentName();
   }
 
   void _onPressed(String textEditingController) {
@@ -34,7 +35,7 @@ class _CheckScreenState extends State<CheckScreen> {
       _previousPassWord = '';
     }
     setState(
-          () {
+      () {
         if (_previousNumber.length < 4) {
           _previousNumber += textEditingController;
           _previousPassWord += '·';
@@ -42,9 +43,6 @@ class _CheckScreenState extends State<CheckScreen> {
         }
       },
     );
-    if (_previousNumber.length == 4) {
-      _checkStudentName();
-    }
   }
 
   void _sendPunchLog() async {
@@ -53,7 +51,6 @@ class _CheckScreenState extends State<CheckScreen> {
       Academy academy = await widget.academyRepository.getAcademy();
       final studentName = _punchList[0];
       final parentsNumber = _punchList[1];
-
 
       // Firestore에 정보를 추가
       await FirebaseFirestore.instance.collection('punchLog').add({
@@ -77,11 +74,11 @@ class _CheckScreenState extends State<CheckScreen> {
     try {
       // CheckViewModel 클래스의 인스턴스 생성
       CheckViewModel checkViewModel =
-      CheckViewModel(repository: widget.academyRepository);
+          CheckViewModel(repository: widget.academyRepository);
 
-      final studentName =
-      await checkViewModel.getCheckStudent(_previousNumber);
-      final parentNumber = await checkViewModel.PushToParentsNumbers(_previousNumber);
+      final studentName = await checkViewModel.getCheckStudent(_previousNumber);
+      final parentNumber =
+          await checkViewModel.PushToParentsNumbers(_previousNumber);
 
       if (studentName.isNotEmpty) {
         // 팝업으로 학생의 이름을 표시
@@ -103,7 +100,8 @@ class _CheckScreenState extends State<CheckScreen> {
                         _punchList.add(studentName[index]);
                         _punchList.add(parentNumber[index]);
                         print(_punchList);
-                        _onAttendanceButtonPressed(_punchType); // Set the punch type
+                        _onAttendanceButtonPressed(
+                            _punchType); // Set the punch type
                         _sendPunchLog(); // Send punch log
                       },
                       child: Text(
@@ -134,7 +132,6 @@ class _CheckScreenState extends State<CheckScreen> {
       print('학생 이름을 확인하는 중 오류 발생: $e');
     }
   }
-
 
   void _onBackspace() {
     setState(() {
@@ -170,8 +167,6 @@ class _CheckScreenState extends State<CheckScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     final controller = TextEditingController(text: _previousPassWord);
 
     return Scaffold(
