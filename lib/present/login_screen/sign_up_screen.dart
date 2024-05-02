@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -84,9 +83,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () => signUpWithFirebase(context),
-              child: Text('회원 가입'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () => signUpWithFirebase(context),
+                child: Text('회원 가입'),
+              ),
             ),
           ],
         ),

@@ -1,10 +1,7 @@
-import 'package:alimpeople_web_punch/present/login_screen/sing_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../data/repository/firebase_academy_repository_impl.dart';
-import '../check_screen/check_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

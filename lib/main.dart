@@ -1,6 +1,7 @@
 import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
 import 'package:alimpeople_web_punch/present/login_screen/first_screen.dart';
 import 'package:alimpeople_web_punch/present/login_screen/login_screen.dart';
+import 'package:alimpeople_web_punch/present/login_screen/sign_up_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,10 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/login',
       builder: (context, state) => LoginScreen(),
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (context, state) => SignUpScreen(),
     ),
     GoRoute(
       path: '/check',
