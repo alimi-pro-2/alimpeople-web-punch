@@ -29,8 +29,11 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/check',
       builder: (context, state) {
-        final db = FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080);
-        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
+        final db = FirebaseFirestore.instance
+          ..useFirestoreEmulator('localhost', 8080);
+        return CheckScreen(
+            academyRepository: FirebaseAcademyRepositoryImpl(
+                uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
       },
     ),
   ],
@@ -50,9 +53,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
-
-
   MyApp({
     super.key,
   });
@@ -62,11 +62,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
-        title: 'Alimi Pro Ver.2',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-      );
+      title: 'Alimi Pro Ver.2',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+    );
   }
 }

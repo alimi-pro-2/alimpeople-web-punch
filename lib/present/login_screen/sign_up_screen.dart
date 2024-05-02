@@ -18,11 +18,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> signUpWithFirebase(BuildContext context) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: _idController.text,
         password: _pwController.text,
       );
-      GoRouter.of(context).go('/login',);
+      GoRouter.of(context).go(
+        '/login',
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

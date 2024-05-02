@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -13,7 +12,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _pwController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance..useAuthEmulator('localhost', 9099);
+  final FirebaseAuth _auth = FirebaseAuth.instance
+    ..useAuthEmulator('localhost', 9099);
 
   bool _isPasswordVisible = false;
 

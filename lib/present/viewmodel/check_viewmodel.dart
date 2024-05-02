@@ -52,9 +52,4 @@ class CheckViewModel with ChangeNotifier {
       rethrow; // 예외를 다시 throw하여 상위 레벨에서 처리할 수 있도록 함
     }
   }
-
-
-
-
-
 }
