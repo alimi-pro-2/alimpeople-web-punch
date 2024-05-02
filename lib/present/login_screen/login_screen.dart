@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _pwController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance..useAuthEmulator('localhost', 9099);
+  static final FirebaseAuth _auth = FirebaseAuth.instance..useAuthEmulator('localhost', 9099);
 
   bool _isPasswordVisible = false;
 
