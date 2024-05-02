@@ -1,7 +1,6 @@
 import 'package:alimpeople_web_punch/present/check_screen/check_screen.dart';
 import 'package:alimpeople_web_punch/present/login_screen/first_screen.dart';
 import 'package:alimpeople_web_punch/present/login_screen/login_screen.dart';
-import 'package:alimpeople_web_punch/present/login_screen/sing_up_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,22 +19,13 @@ final GoRouter _router = GoRouter(
     // 두 번째 스크린
     GoRoute(
       path: '/login',
-      builder: (context, state) {
-        return LoginScreen();
-      },
+      builder: (context, state) => LoginScreen(),
     ),
-    GoRoute(
-      path: '/signup',
-      builder: (context, state) {
-        return SignUpScreen();
-      },
-    ),
-    //TODO 'hmMiHkM2e6EJ0Ey8UdQX7hs77iw8' 내 UID'KSm9vmT57KNDRb0QFWlZ0W416qs1'
     GoRoute(
       path: '/check',
       builder: (context, state) {
         final db = FirebaseFirestore.instance..useFirestoreEmulator('localhost', 8080);
-        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid:'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
+        return CheckScreen(academyRepository: FirebaseAcademyRepositoryImpl(uid: 'KSm9vmT57KNDRb0QFWlZ0W416qs1', firebaseFirestore: db));
       },
     ),
   ],

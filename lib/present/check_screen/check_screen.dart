@@ -4,6 +4,7 @@ import 'package:alimpeople_web_punch/domain/repository/firebase_academy_reposito
 import 'package:alimpeople_web_punch/present/viewmodel/check_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../../domain/model/academy.dart';
 
@@ -19,9 +20,7 @@ class CheckScreen extends StatefulWidget {
 class _CheckScreenState extends State<CheckScreen> {
   DateTime _dateTime = DateTime.now();
   Timer? _timer;
-  String _currentNumber = '';
   String _previousNumber = '';
-  final String _currentPassWord = '.';
   String _previousPassWord = '* * * *';
   String _punchType = ''; // 등원 또는 하원 펀치 타입
   static final List<String> _punchList = [];
@@ -38,7 +37,7 @@ class _CheckScreenState extends State<CheckScreen> {
           () {
         if (_previousNumber.length < 4) {
           _previousNumber += textEditingController;
-          _previousPassWord += '*';
+          _previousPassWord += '·';
           print(_previousNumber);
         }
       },
@@ -51,7 +50,6 @@ class _CheckScreenState extends State<CheckScreen> {
   void _sendPunchLog() async {
     try {
       // CheckViewModel 클래스의 인스턴스 생성
-      CheckViewModel checkViewModel = CheckViewModel(repository: widget.academyRepository);
       Academy academy = await widget.academyRepository.getAcademy();
       final studentName = _punchList[0];
       final parentsNumber = _punchList[1];
@@ -65,7 +63,9 @@ class _CheckScreenState extends State<CheckScreen> {
         'punchType': _punchType, // 등원 또는 하원
         'time': Timestamp.now(), // 현재 시간
       });
-      print(Timestamp.now());
+      FlutterTts flutterTts = FlutterTts();
+      flutterTts.speak('$studentName이 $_punchType하였습니다.');
+
       print('Punch log sent successfully.');
     } catch (e) {
       print('Error sending punch log: $e');
