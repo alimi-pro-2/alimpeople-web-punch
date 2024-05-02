@@ -65,6 +65,12 @@ class _CheckScreenState extends State<CheckScreen> {
       await flutterTts.speak('$studentName이 $_punchType하였습니다.');
 
       print('Punch log sent successfully.');
+
+      setState(() {
+        Navigator.of(context).pop();
+        _previousNumber = '';
+        _previousPassWord = '* * * *';
+      });
     } catch (e) {
       print('Error sending punch log: $e');
     }
