@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -19,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> signInWithFirebase(BuildContext context) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: _idController.text,
         password: _pwController.text,
       );
@@ -34,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
-      throw e;
+      rethrow;
     }
   }
 
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: !_isPasswordVisible,
                 decoration: InputDecoration(
                   labelText: '비밀번호',
-                  labelStyle: TextStyle(fontSize: 10),
+                  labelStyle: const TextStyle(fontSize: 10),
                   hintText: '비밀번호를 입력하세요',
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -89,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () => signInWithFirebase(context),
-                child: Text('로그인'),
+                child: const Text('로그인'),
               ),
             ),
             ElevatedButton(
@@ -98,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   '/signup',
                 );
               },
-              child: Text('회원 가입'),
+              child: const Text('회원 가입'),
             ),
           ],
         ),

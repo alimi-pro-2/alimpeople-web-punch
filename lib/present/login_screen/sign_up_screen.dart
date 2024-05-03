@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -27,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       // 회원 가입 완료 메시지 출력
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('이메일 확인 후 로그인하세요.'),
         ),
       );
@@ -74,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 obscureText: !_isPasswordVisible,
                 decoration: InputDecoration(
                   labelText: '비밀번호',
-                  labelStyle: TextStyle(fontSize: 10),
+                  labelStyle: const TextStyle(fontSize: 10),
                   hintText: '비밀번호를 입력하세요',
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -97,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () => signUpWithFirebase(context),
-                    child: Text('회원 가입'),
+                    child: const Text('회원 가입'),
                   ),
                 ),
                 ElevatedButton(
@@ -106,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       '/login',
                     );
                   },
-                  child: Text('확인'),
+                  child: const Text('확인'),
                 ),
               ],
             ),

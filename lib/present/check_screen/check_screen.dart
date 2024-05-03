@@ -39,7 +39,7 @@ class _CheckScreenState extends State<CheckScreen> {
         if (_previousNumber.length < 4) {
           _previousNumber += textEditingController;
           _previousPassWord += '·';
-          print(_previousNumber);
+          // print(_previousNumber); 번호 입력시 제대로 입력 되고 있는지 확인용
         }
       },
     );
@@ -52,13 +52,16 @@ class _CheckScreenState extends State<CheckScreen> {
       final studentName = _punchList[0];
       final parentsNumber = _punchList[1];
       final countryCode = academy.countryCode;
-      final patentsNumberPulsCountryCode = '$countryCode${parentsNumber.substring(1)}';
+      final patentsNumberPulsCountryCode =
+          '$countryCode${parentsNumber.substring(1)}';
 
       // Firestore에 정보를 추가
       await FirebaseFirestore.instance.collection('punchLog').add({
         'academy': academy.name, // 학원 이름
         'name': studentName.isNotEmpty ? studentName : '', // 학생 이름
-        'parentPhone': patentsNumberPulsCountryCode.isNotEmpty ? patentsNumberPulsCountryCode : '', // 부모 전화번호
+        'parentPhone': patentsNumberPulsCountryCode.isNotEmpty
+            ? patentsNumberPulsCountryCode
+            : '', // 부모 전화번호
         'punchType': _punchType, // 등원 또는 하원
         'time': Timestamp.now(), // 현재 시간
       });
@@ -66,7 +69,7 @@ class _CheckScreenState extends State<CheckScreen> {
       await flutterTts.setLanguage('ko-KR');
       await flutterTts.speak('$studentName이 $_punchType하였습니다.');
 
-      print('Punch log sent successfully.');
+      // print('Punch log sent successfully.'); punchLog가 제대로 입력 되었는지 확인하는 용
 
       setState(() {
         Navigator.of(context).pop();
@@ -74,7 +77,7 @@ class _CheckScreenState extends State<CheckScreen> {
         _previousPassWord = '* * * *';
       });
     } catch (e) {
-      print('Error sending punch log: $e');
+      print('Error sending punch log: $e'); //에러 코드 발송
     }
   }
 
@@ -94,7 +97,7 @@ class _CheckScreenState extends State<CheckScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('학생 이름'),
+              title: const Text('학생 이름'),
               content: SizedBox(
                 width: 200,
                 height: 200,
@@ -107,14 +110,14 @@ class _CheckScreenState extends State<CheckScreen> {
                         _punchList.clear(); // Clear the previous data
                         _punchList.add(studentName[index]);
                         _punchList.add(parentNumber[index]);
-                        print(_punchList);
+                        // print(_punchList); //학생 정보와 학부모 전화 정보를 제대로 받아오는지 확인용
                         _onAttendanceButtonPressed(
                             _punchType); // Set the punch type
                         _sendPunchLog(); // Send punch log
                       },
                       child: Text(
                         studentName[index],
-                        style: TextStyle(fontSize: 32),
+                        style: const TextStyle(fontSize: 32),
                       ),
                     );
                   },
@@ -126,7 +129,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('닫기'),
+                  child: const Text('닫기'),
                 ),
               ],
             );
@@ -200,7 +203,7 @@ class _CheckScreenState extends State<CheckScreen> {
                 BoxDecoration(border: Border.all(color: Colors.grey, width: 2)),
             child: TextField(
               controller: controller,
-              style: TextStyle(fontSize: 35),
+              style: const TextStyle(fontSize: 35),
               textAlign: TextAlign.center,
               readOnly: true,
             ),
@@ -219,7 +222,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -240,7 +243,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -261,7 +264,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -287,7 +290,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -308,7 +311,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -329,7 +332,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -355,7 +358,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -376,7 +379,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -397,7 +400,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -415,7 +418,7 @@ class _CheckScreenState extends State<CheckScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: SizedBox(
                   width: 150,
@@ -430,7 +433,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
-                        BorderSide(width: 1.2), // 외곽선의 두께 설정
+                        const BorderSide(width: 1.2), // 외곽선의 두께 설정
                       ),
                     ),
                     onPressed: () {
@@ -451,7 +454,7 @@ class _CheckScreenState extends State<CheckScreen> {
                   child: OutlinedButton(
                       style: ButtonStyle(
                         side: MaterialStateProperty.all<BorderSide>(
-                          BorderSide(width: 1.2), // 외곽선의 두께 설정
+                          const BorderSide(width: 1.2), // 외곽선의 두께 설정
                         ),
                       ),
                       onPressed: () => _onBackspace(),
@@ -460,7 +463,7 @@ class _CheckScreenState extends State<CheckScreen> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Row(
@@ -475,10 +478,10 @@ class _CheckScreenState extends State<CheckScreen> {
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.blue),
                     minimumSize: MaterialStateProperty.all(
-                      Size(200, 90),
+                      const Size(200, 90),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     '등원',
                     style: TextStyle(
                         fontSize: 30,
@@ -497,10 +500,10 @@ class _CheckScreenState extends State<CheckScreen> {
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.red),
                     minimumSize: MaterialStateProperty.all(
-                      Size(200, 90),
+                      const Size(200, 90),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     '하원',
                     style: TextStyle(
                         fontSize: 30,

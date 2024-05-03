@@ -10,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import 'data/repository/firebase_academy_repository_impl.dart';
 import 'firebase_options.dart';
 
-
 String getAndUseUid() {
   final user = FirebaseAuth.instance.currentUser;
   if (user != null) {
@@ -27,7 +26,7 @@ final GoRouter _router = GoRouter(
     // 첫 번째 스크린
     GoRoute(
       path: '/',
-      builder: (context, state) => FirstScreen(),
+      builder: (context, state) => const FirstScreen(),
     ),
     // 두 번째 스크린
     GoRoute(
@@ -44,14 +43,13 @@ final GoRouter _router = GoRouter(
         final db = FirebaseFirestore.instance
           ..useFirestoreEmulator('localhost', 8080);
         return CheckScreen(
-          //'KSm9vmT57KNDRb0QFWlZ0W416qs1' 알리미 프로 목데이터 입력
+            //'KSm9vmT57KNDRb0QFWlZ0W416qs1' 알리미 프로 목데이터 입력
             academyRepository: FirebaseAcademyRepositoryImpl(
                 uid: getAndUseUid(), firebaseFirestore: db));
       },
     ),
   ],
 );
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +65,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({
+  const MyApp({
     super.key,
   });
 
@@ -83,6 +81,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
-
 }
