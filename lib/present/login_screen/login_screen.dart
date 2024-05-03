@@ -23,8 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _idController.text,
         password: _pwController.text,
       );
-      // Todo: _auth.currentUser.uidㅁ
-      // Todo: GoRouterRedirect
 
       // 로그인에 성공하면 CheckScreen으로 이동
       GoRouter.of(context).go(
