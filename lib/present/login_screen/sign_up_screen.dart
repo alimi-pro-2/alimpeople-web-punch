@@ -23,8 +23,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: _idController.text,
         password: _pwController.text,
       );
-      GoRouter.of(context).go(
-        '/login',
+      await userCredential.user!.sendEmailVerification();
+
+      // 회원 가입 완료 메시지 출력
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('이메일 확인 후 로그인하세요.'),
+        ),
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -86,12 +91,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => signUpWithFirebase(context),
-                child: Text('회원 가입'),
-              ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () => signUpWithFirebase(context),
+                    child: Text('회원 가입'),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    GoRouter.of(context).go(
+                      '/login',
+                    );
+                  },
+                  child: Text('확인'),
+                ),
+              ],
             ),
           ],
         ),
