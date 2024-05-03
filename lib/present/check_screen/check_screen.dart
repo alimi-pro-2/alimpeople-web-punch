@@ -51,12 +51,14 @@ class _CheckScreenState extends State<CheckScreen> {
       Academy academy = await widget.academyRepository.getAcademy();
       final studentName = _punchList[0];
       final parentsNumber = _punchList[1];
+      final countryCode = academy.countryCode;
+      final patentsNumberPulsCountryCode = '$countryCode${parentsNumber.substring(1)}';
 
       // Firestore에 정보를 추가
       await FirebaseFirestore.instance.collection('punchLog').add({
         'academy': academy.name, // 학원 이름
         'name': studentName.isNotEmpty ? studentName : '', // 학생 이름
-        'parentPhone': parentsNumber.isNotEmpty ? parentsNumber : '', // 부모 전화번호
+        'parentPhone': patentsNumberPulsCountryCode.isNotEmpty ? patentsNumberPulsCountryCode : '', // 부모 전화번호
         'punchType': _punchType, // 등원 또는 하원
         'time': Timestamp.now(), // 현재 시간
       });
