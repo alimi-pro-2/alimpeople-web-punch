@@ -31,11 +31,11 @@ final GoRouter _router = GoRouter(
     // 두 번째 스크린
     GoRoute(
       path: '/login',
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: '/signup',
-      builder: (context, state) => SignUpScreen(),
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       path: '/check',
@@ -61,7 +61,7 @@ void main() async {
   // 안드로이드 에뮬레이터 실행 주소
   // final db = FirebaseFirestore.instance..useFirestoreEmulator('10.0.2.2', 8080);
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
